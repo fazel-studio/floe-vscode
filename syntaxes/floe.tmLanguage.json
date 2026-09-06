@@ -1,0 +1,157 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Floe",
+  "scopeName": "source.floe",
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#strings" },
+    { "include": "#directionStatement" },
+    { "include": "#groupStatement" },
+    { "include": "#metaStatement" },
+    { "include": "#noteStatement" },
+    { "include": "#linkStatement" },
+    { "include": "#edgeStatement" },
+    { "include": "#nodeStatement" },
+    { "include": "#keywords" },
+    { "include": "#operators" },
+    { "include": "#punctuation" }
+  ],
+  "repository": {
+    "comments": {
+      "name": "comment.line.double-slash.floe",
+      "match": "//.*$"
+    },
+    "strings": {
+      "name": "string.quoted.double.floe",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "name": "constant.character.escape.floe",
+          "match": "\\\\[\"\\\\nt]"
+        }
+      ]
+    },
+    "directionStatement": {
+      "name": "meta.direction.floe",
+      "match": "^\\s*(direction)\\s+(TB|BT|LR|RL)\\b",
+      "captures": {
+        "1": { "name": "keyword.control.direction.floe" },
+        "2": { "name": "constant.language.direction-value.floe" }
+      }
+    },
+    "groupStatement": {
+      "name": "meta.group.floe",
+      "begin": "\\b(group)\\b\\s+([A-Za-z_][A-Za-z0-9_-]*)",
+      "beginCaptures": {
+        "1": { "name": "keyword.control.group.floe" },
+        "2": { "name": "entity.name.type.group.floe" }
+      },
+      "end": "(?=\\n)",
+      "patterns": [
+        { "include": "#comments" },
+        { "include": "#strings" },
+        {
+          "name": "entity.name.type.floe",
+          "match": "\\[\\s*([A-Za-z_][A-Za-z0-9_-]*)\\s*\\]",
+          "captures": {
+            "1": { "name": "entity.name.type.floe" }
+          }
+        },
+        {
+          "name": "punctuation.definition.bracket.floe",
+          "match": "[\\[\\]]"
+        },
+        {
+          "name": "punctuation.definition.brace.floe",
+          "match": "[\\{\\}]"
+        }
+      ]
+    },
+    "metaStatement": {
+      "name": "meta.meta.floe",
+      "match": "^\\s*(meta)\\s+([A-Za-z_][A-Za-z0-9_-]*)\\s*(=)\\s*(\".*?\")",
+      "captures": {
+        "1": { "name": "keyword.control.meta.floe" },
+        "2": { "name": "variable.other.meta-key.floe" },
+        "3": { "name": "keyword.operator.assignment.floe" },
+        "4": { "name": "string.quoted.double.floe" }
+      }
+    },
+    "noteStatement": {
+      "name": "meta.note.floe",
+      "begin": "\\b(note)\\b",
+      "beginCaptures": {
+        "1": { "name": "keyword.control.note.floe" }
+      },
+      "end": "(?=\\n)",
+      "patterns": [
+        {
+          "name": "variable.other.annotation-target.floe",
+          "match": "\\b([A-Za-z_][A-Za-z0-9_-]*)\\b(?=\\s*\".*?\")"
+        },
+        { "include": "#strings" },
+        { "include": "#comments" }
+      ]
+    },
+    "linkStatement": {
+      "name": "meta.link.floe",
+      "match": "^\\s*(link)\\s+([A-Za-z_][A-Za-z0-9_-]*)\\s*(\".*?\")",
+      "captures": {
+        "1": { "name": "keyword.control.link.floe" },
+        "2": { "name": "variable.other.link-target.floe" },
+        "3": { "name": "string.quoted.double.url.floe" }
+      }
+    },
+    "edgeStatement": {
+      "name": "meta.edge.floe",
+      "begin": "\\b([A-Za-z_][A-Za-z0-9_-]*)\\s*(->|--)\\s*([A-Za-z_][A-Za-z0-9_-]*)",
+      "beginCaptures": {
+        "1": { "name": "entity.name.node.source.floe" },
+        "2": { "name": "keyword.operator.edge.floe" },
+        "3": { "name": "entity.name.node.target.floe" }
+      },
+      "end": "(?=\\n)",
+      "patterns": [
+        { "include": "#comments" },
+        { "include": "#strings" },
+        {
+          "name": "meta.edge.label.floe",
+          "begin": "\\s*(:)\\s*",
+          "beginCaptures": {
+            "1": { "name": "punctuation.separator.label.floe" }
+          },
+          "end": "(?=\\n|//)",
+          "patterns": [
+            { "include": "#strings" },
+            {
+              "name": "string.unquoted.label.floe",
+              "match": "[^\\n]+"
+            }
+          ]
+        }
+      ]
+    },
+    "nodeStatement": {
+      "name": "meta.node.floe",
+      "match": "^\\s*([A-Za-z_][A-Za-z0-9_-]*)\\s*(\\[\\s*[A-Za-z_][A-Za-z0-9_-]*\\s*\\])?\\s*(\".*?\")?\\s*(?=//|$|\\n)",
+      "captures": {
+        "1": { "name": "entity.name.node.floe" },
+        "2": { "name": "entity.name.type.floe" },
+        "3": { "name": "string.quoted.double.label.floe" }
+      }
+    },
+    "keywords": {
+      "name": "keyword.control.floe",
+      "match": "\\b(direction|group|meta|note|link)\\b"
+    },
+    "operators": {
+      "name": "keyword.operator.floe",
+      "match": "->|--|:"
+    },
+    "punctuation": {
+      "name": "punctuation.definition.floe",
+      "match": "[\\[\\]\\{\\}=]"
+    }
+  }
+}

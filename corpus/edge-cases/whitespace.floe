@@ -1,0 +1,9 @@
+direction   LR
+
+User   ->   Login
+
+Login  ->  Dashboard   :   success
+
+  // comment with leading spaces
+Cache    --   Database
+

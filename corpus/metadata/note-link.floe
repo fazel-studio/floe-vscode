@@ -1,0 +1,6 @@
+API [service] "API Gateway"
+Database [database]
+
+note "Global diagram note"
+note API "Handles authentication"
+link API "https://api.example.com"

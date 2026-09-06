@@ -1,0 +1,189 @@
+{
+  "name": "floe-vscode",
+  "displayName": "Floe Diagrams",
+  "description": "First-class VS Code extension for the Floe diagram language — lightweight, human-readable, AI-friendly DSL for directed graphs.",
+  "version": "0.1.0",
+  "publisher": "fazelstudio",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "keywords": [
+    "floe",
+    "diagram",
+    "dsl",
+    "graph",
+    "visualization"
+  ],
+  "icon": "assets/floe-icon.png",
+  "activationEvents": [
+    "onLanguage:floe",
+    "onCustomEditor:floe.previewEditor",
+    "onCommand:floe.openPreview",
+    "onCommand:floe.showPreviewToSide",
+    "onCommand:floe.refreshPreview",
+    "onCommand:floe.restartLanguageServer"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "floe",
+        "aliases": [
+          "Floe",
+          "floe"
+        ],
+        "extensions": [
+          ".floe"
+        ],
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "./assets/floe-light.svg",
+          "dark": "./assets/floe.svg"
+        }
+      }
+    ],
+    "grammars": [
+      {
+        "language": "floe",
+        "scopeName": "source.floe",
+        "path": "./syntaxes/floe.tmLanguage.json"
+      }
+    ],
+    "customEditors": [
+      {
+        "viewType": "floe.previewEditor",
+        "displayName": "Floe Preview",
+        "selector": [
+          {
+            "filenamePattern": "*.floe"
+          }
+        ],
+        "priority": "option"
+      }
+    ],
+    "commands": [
+      {
+        "command": "floe.restartLanguageServer",
+        "title": "Floe: Restart Language Server",
+        "category": "Floe"
+      },
+      {
+        "command": "floe.openPreview",
+        "title": "Floe: Open Preview",
+        "category": "Floe",
+        "icon": "$(preview)"
+      },
+      {
+        "command": "floe.refreshPreview",
+        "title": "Floe: Refresh Preview",
+        "category": "Floe"
+      },
+      {
+        "command": "floe.showPreviewToSide",
+        "title": "Floe: Open Preview to the Side",
+        "category": "Floe",
+        "icon": "$(split-horizontal)"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "floe.openPreview",
+        "key": "Ctrl+Shift+V",
+        "when": "editorTextFocus && editorLangId == 'floe'",
+        "mac": "Cmd+Shift+V"
+      },
+      {
+        "command": "floe.refreshPreview",
+        "key": "Ctrl+Shift+R",
+        "when": "editorTextFocus && editorLangId == 'floe'",
+        "mac": "Cmd+Shift+R"
+      }
+    ],
+    "configuration": {
+      "title": "Floe",
+      "properties": {
+        "floe.languageServer.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable the Floe Language Server (diagnostics, completion, hover, formatting, document symbols, etc.). When disabled only TextMate highlighting remains.",
+          "scope": "window"
+        },
+        "floe.languageServer.path": {
+          "type": "string",
+          "default": "",
+          "description": "Custom path to Floe language server entry. If set, overrides bundled/workspace discovery. Should point to the built CLI entry (e.g. /path/to/floe/dist/src/cli/main.js) or the LSP server file (dist/src/lsp/server.js). Leave empty for automatic discovery (bundled > workspace).",
+          "scope": "window"
+        },
+        "floe.trace.server": {
+          "type": "string",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "default": "off",
+          "description": "Traces communication between VS Code and the Floe language server.",
+          "scope": "window"
+        },
+        "floe.preview.autoUpdate": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically update the preview when the source file changes. Disable to require manual refresh.",
+          "scope": "window"
+        }
+      }
+    },
+    "menus": {
+      "editor/title": [
+        {
+          "command": "floe.showPreviewToSide",
+          "alt": "floe.openPreview",
+          "when": "editorLangId == 'floe'",
+          "group": "navigation"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "floe.openPreview",
+          "when": "editorLangId == 'floe'",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "packageManager": "bun@1.3.11",
+  "scripts": {
+    "vscode:prepublish": "bun run compile",
+    "compile": "tsc -p tsconfig.json",
+    "watch": "tsc -watch -p tsconfig.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "package": "vsce package",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@fazelstudio/floe": "^1.0.1",
+    "vscode-languageclient": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^3.9.2",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fazel-studio/floe-vscode.git"
+  },
+  "homepage": "https://github.com/fazel-studio/floe-vscode#readme",
+  "bugs": {
+    "url": "https://github.com/fazel-studio/floe-vscode/issues"
+  },
+  "license": "MIT",
+  "author": "Zulfazli (Fazelllyyy) <zulfazlilsm@gmail.com>"
+}

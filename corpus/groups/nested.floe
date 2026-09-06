@@ -1,0 +1,9 @@
+group Frontend [subsystem] "Frontend Services" {
+  group Auth {
+    Login
+    Dashboard
+    Login -> Dashboard : success
+  }
+  User [person] "End User"
+  User -> Login
+}

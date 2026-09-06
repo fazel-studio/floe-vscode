@@ -1,0 +1,6 @@
+group Backend {
+  API
+  Database
+  Cache
+  API -> Database : query
+}

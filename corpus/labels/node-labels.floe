@@ -1,0 +1,4 @@
+User [person] "End User"
+API [service] "API Gateway"
+Database [database]
+Cache [service] "Redis Cache"

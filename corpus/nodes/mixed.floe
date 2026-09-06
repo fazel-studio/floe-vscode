@@ -1,0 +1,7 @@
+User [person] "End User"
+API [service]
+Database [database]
+Cache [service]
+User -> API : request
+API -> Database : query
+API -> Cache : miss

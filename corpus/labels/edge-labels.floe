@@ -1,0 +1,4 @@
+Login -> Dashboard : success
+Login -> Error : invalid credentials
+A -- B : associated
+X -> Y : "quoted label"

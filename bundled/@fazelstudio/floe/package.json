@@ -1,0 +1,90 @@
+{
+  "name": "@fazelstudio/floe",
+  "version": "1.0.1",
+  "description": "Floe diagram language — lightweight, human-readable, AI-friendly DSL for directed graphs (v1.0 stable)",
+  "type": "module",
+  "main": "./dist/src/index.js",
+  "module": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "bin": {
+    "floe": "./dist/src/cli/main.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/src/index.js"
+    },
+    "./cli": {
+      "types": "./dist/src/cli/main.d.ts",
+      "import": "./dist/src/cli/main.js"
+    },
+    "./lsp": {
+      "types": "./dist/src/lsp/server.d.ts",
+      "import": "./dist/src/lsp/server.js"
+    },
+    "./layout": {
+      "types": "./dist/src/layout/index.d.ts",
+      "import": "./dist/src/layout/index.js"
+    },
+    "./render": {
+      "types": "./dist/src/render/index.d.ts",
+      "import": "./dist/src/render/index.js"
+    },
+    "./pipeline": {
+      "types": "./dist/src/pipeline.d.ts",
+      "import": "./dist/src/pipeline.js"
+    },
+    "./language": {
+      "types": "./dist/src/language/index.d.ts",
+      "import": "./dist/src/language/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fazel-studio/floe.git"
+  },
+  "homepage": "https://github.com/fazel-studio/floe#readme",
+  "bugs": {
+    "url": "https://github.com/fazel-studio/floe/issues"
+  },
+  "author": "Zulfazli (Fazelllyyy) <zulfazlilsm@gmail.com>",
+  "packageManager": "bun@1.3.11",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "corpus:check": "vitest run --reporter=verbose",
+    "floe": "node ./dist/src/cli/main.js",
+    "benchmark": "bun benchmarks/run.ts",
+    "bundle:measure": "bun scripts/measure-bundle.ts",
+    "fuzz": "vitest run tests/fuzz.test.ts --reporter=verbose"
+  },
+  "devDependencies": {
+    "@types/node": "^26.4.1",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  },
+  "keywords": [
+    "diagram",
+    "dsl",
+    "floe",
+    "parser",
+    "graph",
+    "visualization",
+    "svg",
+    "language",
+    "lsp",
+    "ai"
+  ],
+  "license": "MIT"
+}

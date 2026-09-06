@@ -1,0 +1,7 @@
+group Backend [subsystem] "Backend Services" {
+  API [service] "API Gateway"
+  Database [database]
+  Cache [service]
+  API -> Database : query
+  API -> Cache : miss
+}
