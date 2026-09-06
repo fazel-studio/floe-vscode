@@ -178,11 +178,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/fazel-studio/floe-vscode.git"
+    "url": "https://github.com/fazelstudio/floe-vscode.git"
   },
-  "homepage": "https://github.com/fazel-studio/floe-vscode#readme",
+  "homepage": "https://github.com/fazelstudio/floe-vscode#readme",
   "bugs": {
-    "url": "https://github.com/fazel-studio/floe-vscode/issues"
+    "url": "https://github.com/fazelstudio/floe-vscode/issues"
   },
   "license": "MIT",
   "author": "Zulfazli (Fazelllyyy) <zulfazlilsm@gmail.com>"
